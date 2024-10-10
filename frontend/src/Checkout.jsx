@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const BASE_URL = "http://localhost:8000/api"
 const Checkout = () => {
   const [form, setForm] = useState({ name: "", number: "", amount: "" });
 
@@ -18,11 +19,12 @@ const Checkout = () => {
       name: form.name,
       mobileNumber: form.number,
       amount: form.amount,
+      transactionID : Math.floor( 1000 * Math.random())
     };
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/create-order",
+        `${BASE_URL}/payment/create-order`,
         data
       );
       console.log(response.data);
